@@ -12,7 +12,7 @@ int main() {
 
     while (true) {
         read(STDIN_FILENO, &c, sizeof(char));
-        if (c == '\n' || c == ' ') {
+        if (c == '\n' || c == ' ' || c == '\t') {
             break;
         }
         fileName11 += c;
@@ -25,7 +25,15 @@ int main() {
 
     while (true) {
         read(STDIN_FILENO, &c, sizeof(char));
-        if (c == '\n' || c == ' ') {
+        if (c != '\n' && c != ' ' && c != '\t') {
+            break;
+        }
+    }
+    fileName22 += c;
+
+    while (true) {
+        read(STDIN_FILENO, &c, sizeof(char));
+        if (c == '\n' || c == ' ' || c == '\t') {
             break;
         }
         fileName22 += c;
@@ -74,10 +82,12 @@ int main() {
         while (read(STDIN_FILENO, &c, sizeof(c))) {
             if (c == ' ' || c == '\n' || c == '\t') {
                 s += '\n';
-                if (s.size() % 2 == 0) {
-                    s1 += s;
-                } else {
-                    s2 += s;
+                if (s.size() != 1) {
+                    if (s.size() % 2 == 0) {
+                        s1 += s;
+                    } else {
+                        s2 += s;
+                    }
                 }
                 s = "";
                 continue;
